@@ -37,5 +37,16 @@ namespace DAL
             return LObjetivos;
 
         }
+
+        public bool Eliminar_Objetivos()
+        {
+            Acceso Datos = new Acceso();
+            bool Resultado;
+
+            string consulta = "SP_Objetivos_Baja";
+            return Resultado = Datos.Escribir(consulta, null);
+
+           
+        }
     }
 }

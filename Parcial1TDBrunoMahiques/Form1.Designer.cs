@@ -41,6 +41,7 @@
             this.Disparar = new System.Windows.Forms.Button();
             this.MiliNombre = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.RecargarRadar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +68,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(48, 207);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(616, 231);
+            this.dataGridView1.Size = new System.Drawing.Size(705, 231);
             this.dataGridView1.TabIndex = 2;
             // 
             // label1
@@ -159,11 +160,22 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "1 = Objetivo Eliminado\r\n0 = Objetivo ileso";
             // 
+            // RecargarRadar
+            // 
+            this.RecargarRadar.Location = new System.Drawing.Point(50, 446);
+            this.RecargarRadar.Name = "RecargarRadar";
+            this.RecargarRadar.Size = new System.Drawing.Size(75, 23);
+            this.RecargarRadar.TabIndex = 15;
+            this.RecargarRadar.Text = "Recargar Radar";
+            this.RecargarRadar.UseVisualStyleBackColor = true;
+            this.RecargarRadar.Click += new System.EventHandler(this.RecargarRadar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 481);
+            this.Controls.Add(this.RecargarRadar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.MiliNombre);
             this.Controls.Add(this.Disparar);
@@ -200,6 +212,7 @@
         private System.Windows.Forms.Button Disparar;
         private System.Windows.Forms.Button MiliNombre;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button RecargarRadar;
     }
 }
 

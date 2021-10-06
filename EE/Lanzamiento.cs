@@ -17,5 +17,6 @@ namespace EE
 
         public string ObjYDistancia { get; set; }
         public int Eliminado { get; set; }
+        public int Id_objetivo { get; set; }
     }
 }

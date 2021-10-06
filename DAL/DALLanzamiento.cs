@@ -24,10 +24,14 @@ namespace DAL
                 Hdatos.Add("@Militar", Lanzamiento.Militar);
                 Hdatos.Add("@Objetivo", Lanzamiento.ObjYDistancia);
                 Hdatos.Add("@Eliminado", Lanzamiento.Eliminado);
+                Hdatos.Add("@Id_objetivo", Lanzamiento.Id_objetivo);
 
-                Resultado = Datos.Escribir(consulta, Hdatos);
+            Resultado = Datos.Escribir(consulta, Hdatos);
                 return Resultado;
             }
+
+       
+
         public List<Lanzamiento> ListarLanzamientos()
         {
             Acceso Datos = new Acceso();
@@ -42,10 +46,12 @@ namespace DAL
                 foreach (DataRow fila in ds.Tables[0].Rows)
                 {
                     Lanzamiento Lanzamiento = new Lanzamiento();
+                    Lanzamiento.Id_lanza = Convert.ToInt16(fila["Id_Lanza"]);
                     Lanzamiento.NombreArma = fila["Arma"].ToString();
                     Lanzamiento.Militar = fila["Militar"].ToString();
                     Lanzamiento.ObjYDistancia = fila["Objetivo_Distancia"].ToString();
                     Lanzamiento.Eliminado = Convert.ToInt16(fila["Eliminado"]);
+                    Lanzamiento.Id_objetivo = Convert.ToInt16(fila["Id_objetivo"]);
                     LLanzamiento.Add(Lanzamiento);
 
                 }

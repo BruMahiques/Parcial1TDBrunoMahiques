@@ -19,8 +19,9 @@ namespace Parcial1TDBrunoMahiques
         Lanzamiento Lanzamiento;
         List<Objetivo> Radar;
         List<Lanzamiento> LLanzamientos;
-        
+        DALObjetivos DALObjetivos = new DALObjetivos();
 
+        
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace Parcial1TDBrunoMahiques
 
             this.comboArmas.DataSource = EstrategiaLanzamiento;
 
-            DALObjetivos DALObjetivos = new DALObjetivos();
+           
             Radar = DALObjetivos.ListarObjetivos();
 
             this.comboRadar.DataSource = Radar;
@@ -45,7 +46,12 @@ namespace Parcial1TDBrunoMahiques
             ObtenerLanzamientos();
 
 
-
+            if (Militar == null)
+            {
+                Disparar.Visible=false;
+                ArmaAdecuadaBoton.Visible = false;
+            }
+            
 
         }
 
@@ -54,9 +60,10 @@ namespace Parcial1TDBrunoMahiques
         private void ArmaAdecuadaBoton_Click(object sender, EventArgs e)
         {
             if (Militar != null)
-            { 
-                
-            Objetivo ObjetivoSeleccionado = (Objetivo)this.comboRadar.SelectedItem;
+            {
+                Disparar.Show();
+                ArmaAdecuadaBoton.Show();
+                Objetivo ObjetivoSeleccionado = (Objetivo)this.comboRadar.SelectedItem;
 
             if (ObjetivoSeleccionado.Distancia < 10000)
             {
@@ -85,20 +92,20 @@ namespace Parcial1TDBrunoMahiques
 
         private void Disparar_Click(object sender, EventArgs e)
         {
-            if (Militar != null)
+            if (Militar.Arma != null)
             {
                 Lanzamiento = new Lanzamiento();
-                
-                var Tick = Environment.TickCount;
-                var random = new Random(Tick);
-                var value = random.Next(0, 1);
 
-              //  Lanzamiento.Arma = Militar.Arma;
+                Random random = new Random();
+                int value = random.Next(2);
+                Objetivo Obje = (Objetivo)this.comboRadar.SelectedItem;
+                //  Lanzamiento.Arma = Militar.Arma;
                 Lanzamiento.Militar = Militar.Nombre;
                // Lanzamiento.Objetivo = (Objetivo)this.comboRadar.SelectedItem;
                 Lanzamiento.NombreArma = this.comboArmas.SelectedItem.ToString();
                 Lanzamiento.ObjYDistancia = this.comboRadar.SelectedItem.ToString();
                 Lanzamiento.Eliminado = value;
+                Lanzamiento.Id_objetivo = Obje.Id_objetivo;
 
                 DALLanzamiento DALLanzamiento = new DALLanzamiento();
                 DALLanzamiento.Guardar_Lanzamientos(Lanzamiento);
@@ -128,6 +135,19 @@ namespace Parcial1TDBrunoMahiques
             Militar = new Militar();
             Militar.Nombre = textBox1.Text;
             label6.Text = Militar.Nombre;
+            Disparar.Visible = true;
+            ArmaAdecuadaBoton.Visible = true;
+        }
+
+        private void RecargarRadar_Click(object sender, EventArgs e)
+        {
+            bool resultado;
+            resultado = DALObjetivos.Eliminar_Objetivos();
+            Radar = DALObjetivos.ListarObjetivos();
+
+            this.comboRadar.DataSource = Radar;
+
+            MessageBox.Show("Se recargó correctamente el radar");
         }
     }
 }
